@@ -14,9 +14,9 @@ URL:		http://www.theora.org/
 BuildRequires:	SDL-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-# requires libogg dated 20020924 or newer
-BuildRequires:	libogg-devel > 2:1.0
+BuildRequires:	libogg-devel >= 2:1.1
 BuildRequires:	libtool
+Requires:	libogg >= 2:1.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -87,18 +87,13 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc COPYING README
-%attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
-%{_datadir}/%{name}
 
 %files devel
 %defattr(644,root,root,755)
-%doc devel-doc/*
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/lib*.la
-%{_includedir}/foo
-%{_aclocaldir}/*.m4
-%{_pkgconfigdir}/*.pc
+%{_includedir}/theora
 
 %files static
 %defattr(644,root,root,755)
