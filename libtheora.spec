@@ -2,14 +2,13 @@ Summary:	Theora - video codec intended for use within Ogg multimedia streaming s
 Summary(pl):	Theora - kodek obrazu do u¿ywania w systemie strumieni multimedialnych Ogg
 Name:		libtheora
 Version:	1.0
-%define	bver	alpha2
+%define	bver	alpha3
 Release:	0.%{bver}.1
 License:	BSD-like
 Group:		Libraries
 Source0:	http://www.theora.org/files/%{name}-%{version}%{bver}.tar.gz
-# Source0-md5:	8fdeb6fabc7c67598b1031e0a3cb73dd
-Patch0:		%{name}-nostatic.patch
-Patch1:		%{name}-ogg.patch
+# Source0-md5:	eab566a0c7fdc21da1ce503edfa43bb4
+Patch0:		%{name}-ogg.patch
 URL:		http://www.theora.org/
 BuildRequires:	SDL-devel
 BuildRequires:	autoconf
@@ -60,7 +59,6 @@ Statyczna biblioteka Theora.
 %prep
 %setup -q -n %{name}-%{version}%{bver}
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__libtoolize}
