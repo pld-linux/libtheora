@@ -2,20 +2,21 @@ Summary:	Theora - video codec intended for use within Ogg multimedia streaming s
 Summary(pl):	Theora - kodek obrazu do u¿ywania w systemie strumieni multimedialnych Ogg
 Name:		libtheora
 Version:	1.0
-%define	bver	alpha3
+%define	bver	alpha4
 Release:	0.%{bver}.1
 License:	BSD-like
 Group:		Libraries
-Source0:	http://www.theora.org/files/%{name}-%{version}%{bver}.tar.gz
-# Source0-md5:	eab566a0c7fdc21da1ce503edfa43bb4
-Patch0:		%{name}-ogg.patch
+Source0:	http://downloads.xiph.org/releases/theora/%{name}-%{version}%{bver}.tar.gz
+# Source0-md5:	75f436a980b80f8b8102ee182ddb8748
 URL:		http://www.theora.org/
 BuildRequires:	SDL-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libogg-devel >= 2:1.1
 BuildRequires:	libtool
+BuildRequires:	libvorbis-devel >= 1:1.0.1
 Requires:	libogg >= 2:1.1
+Requires:	libvorbis >= 1:1.0.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -58,15 +59,13 @@ Statyczna biblioteka Theora.
 
 %prep
 %setup -q -n %{name}-%{version}%{bver}
-%patch0 -p1
 
 %build
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
-%configure \
-	--enable-shared
+%configure
 
 %{__make}
 
@@ -74,7 +73,8 @@ Statyczna biblioteka Theora.
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	docdir=%{_builddir}/%{buildsubdir}/__docs
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -90,8 +90,9 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
 %{_includedir}/theora
+%{_libdir}/lib*.la
+%{_pkgconfigdir}/theora.pc
 
 %files static
 %defattr(644,root,root,755)
