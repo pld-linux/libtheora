@@ -12,6 +12,7 @@ URL:		http://www.theora.org/
 BuildRequires:	SDL-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	doxygen
 BuildRequires:	libogg-devel >= 2:1.1
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel >= 1:1.0.1
@@ -89,9 +90,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
+%doc doc/{color.html,vp3-format.txt} doc/libtheora/html doc/spec/Theora_I_spec.pdf
 %attr(755,root,root) %{_libdir}/lib*.so
-%{_includedir}/theora
 %{_libdir}/lib*.la
+%{_includedir}/theora
 %{_pkgconfigdir}/theora.pc
 
 %files static
