@@ -1,0 +1,29 @@
+--- libtheora-1.0alpha2/lib/dct_decode.c.orig	2003-06-08 02:08:38.000000000 +0200
++++ libtheora-1.0alpha2/lib/dct_decode.c	2003-08-16 02:10:21.368089336 +0200
+@@ -16,6 +16,7 @@
+  ********************************************************************/
+ 
+ #include <ogg/ogg.h>
++#include <stdint.h>
+ #include "encoder_internal.h"
+ 
+ 
+@@ -122,7 +123,7 @@
+   
+   /* Get the pixel index for the first pixel in the fragment. */
+   ReconIntra( pbi, (unsigned char *)(&pbi->ThisFrameRecon[ReconPixelIndex]), 
+-	      (ogg_uint16_t *)pbi->ReconDataBuffer, ReconPixelsPerLine );
++	      (uint16_t *)pbi->ReconDataBuffer, ReconPixelsPerLine );
+   
+ }
+ 
+--- libtheora-1.0alpha2/lib/Makefile.am.orig	2003-06-04 10:49:47.000000000 +0200
++++ libtheora-1.0alpha2/lib/Makefile.am	2003-08-16 02:18:10.580758168 +0200
+@@ -12,6 +12,7 @@
+ 	comment.c toplevel_lookup.h toplevel.h
+ 
+ libtheora_la_LDFLAGS = -version-info @V_LIB_CURRENT@:@V_LIB_REVISION@:@V_LIB_AGE@
++libtheora_la_LIBADD = -logg
+ 
+ CLEANFILES = $(lib_LTLIBRARIES)
+ 
