@@ -16,6 +16,7 @@ BuildRequires:	doxygen
 BuildRequires:	libogg-devel >= 2:1.1
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel >= 1:1.0.1
+BuildRequires:	pkgconfig
 Requires:	libogg >= 2:1.1
 Requires:	libvorbis >= 1:1.0.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
