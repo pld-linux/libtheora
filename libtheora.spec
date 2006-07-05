@@ -21,6 +21,7 @@ BuildRequires:	sed >= 4.0
 Requires:	libogg >= 2:1.1
 Requires:	libvorbis >= 1:1.0.1
 Obsoletes:	libtheora-mmx
+Provides:	libtheora-mmx
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -43,6 +44,7 @@ Summary(pl):	Pliki nag³ówkowe biblioteki Theora
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	libtheora-mmx-devel
+Provides:	libtheora-mmx-devel
 
 %description devel
 Header files for Theora library.
@@ -56,6 +58,7 @@ Summary(pl):	Statyczna biblioteka Theora
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Obsoletes:	libtheora-mmx-static
+Provides:	libtheora-mmx-static
 
 %description static
 Static Theora library.
