@@ -1,5 +1,5 @@
 Summary:	Theora - video codec intended for use within Ogg multimedia streaming system
-Summary(pl):	Theora - kodek obrazu do u¿ywania w systemie strumieni multimedialnych Ogg
+Summary(pl.UTF-8):   Theora - kodek obrazu do uÅ¼ywania w systemie strumieni multimedialnych Ogg
 Name:		libtheora
 Version:	1.0
 %define	bver	alpha7
@@ -31,16 +31,16 @@ is derived directly from On2's VP3 codec; Currently the two are nearly
 identical, varying only in framing headers, but Theora will diverge
 and improve from the main VP3 development lineage as time progresses.
 
-%description -l pl
+%description -l pl.UTF-8
 Theora to pierwszy publicznie wypuszczony przez Xiph.Org kodek obrazu,
-maj±cy byæ u¿ywany w systemie strumieni multimedialnych Ogg. Theora
-wywodzi siê bezpo¶rednio z kodeka VP3 On2. Aktualnie oba s± prawie
-identyczne, ró¿ni± siê jedynie nag³ówkami ramek, ale Theora bêdzie siê
-coraz bardziej rozwijaæ w stosunku do VP3.
+majÄ…cy byÄ‡ uÅ¼ywany w systemie strumieni multimedialnych Ogg. Theora
+wywodzi siÄ™ bezpoÅ›rednio z kodeka VP3 On2. Aktualnie oba sÄ… prawie
+identyczne, rÃ³Å¼niÄ… siÄ™ jedynie nagÅ‚Ã³wkami ramek, ale Theora bÄ™dzie siÄ™
+coraz bardziej rozwijaÄ‡ w stosunku do VP3.
 
 %package devel
 Summary:	Header files for Theora library
-Summary(pl):	Pliki nag³ówkowe biblioteki Theora
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe biblioteki Theora
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	libtheora-mmx-devel
@@ -49,12 +49,12 @@ Provides:	libtheora-mmx-devel
 %description devel
 Header files for Theora library.
 
-%description devel -l pl
-Pliki nag³ówkowe biblioteki Theora.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe biblioteki Theora.
 
 %package static
 Summary:	Static Theora library
-Summary(pl):	Statyczna biblioteka Theora
+Summary(pl.UTF-8):   Statyczna biblioteka Theora
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Obsoletes:	libtheora-mmx-static
@@ -63,7 +63,7 @@ Provides:	libtheora-mmx-static
 %description static
 Static Theora library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka Theora.
 
 %prep
