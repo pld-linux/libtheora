@@ -1,5 +1,5 @@
 Summary:	Theora - video codec intended for use within Ogg multimedia streaming system
-Summary(pl.UTF-8):   Theora - kodek obrazu do używania w systemie strumieni multimedialnych Ogg
+Summary(pl.UTF-8):	Theora - kodek obrazu do używania w systemie strumieni multimedialnych Ogg
 Name:		libtheora
 Version:	1.0
 %define	bver	alpha7
@@ -40,7 +40,7 @@ coraz bardziej rozwijać w stosunku do VP3.
 
 %package devel
 Summary:	Header files for Theora library
-Summary(pl.UTF-8):   Pliki nagłówkowe biblioteki Theora
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Theora
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	libtheora-mmx-devel
@@ -54,7 +54,7 @@ Pliki nagłówkowe biblioteki Theora.
 
 %package static
 Summary:	Static Theora library
-Summary(pl.UTF-8):   Statyczna biblioteka Theora
+Summary(pl.UTF-8):	Statyczna biblioteka Theora
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Obsoletes:	libtheora-mmx-static
