@@ -2,12 +2,12 @@ Summary:	Theora - video codec intended for use within Ogg multimedia streaming s
 Summary(pl.UTF-8):	Theora - kodek obrazu do używania w systemie strumieni multimedialnych Ogg
 Name:		libtheora
 Version:	1.0
-%define	bver	alpha7
-Release:	0.%{bver}.3
+%define	bver	beta1
+Release:	0.%{bver}.1
 License:	BSD-like
 Group:		Libraries
 Source0:	http://downloads.xiph.org/releases/theora/%{name}-%{version}%{bver}.tar.bz2
-# Source0-md5:	1bc851e39e4b16977131d5e5f769f48b
+# Source0-md5:	e2ff1996c5a9fadd0df1025aa10bc35e
 URL:		http://www.theora.org/
 BuildRequires:	SDL-devel
 BuildRequires:	autoconf
@@ -18,6 +18,8 @@ BuildRequires:	libtool
 BuildRequires:	libvorbis-devel >= 1:1.0.1
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
+BuildRequires:	tetex-format-pdflatex
+BuildRequires:	transfig
 Requires:	libogg >= 2:1.1
 Requires:	libvorbis >= 1:1.0.1
 Obsoletes:	libtheora-mmx
@@ -79,6 +81,7 @@ Statyczna biblioteka Theora.
 %configure
 
 %{__make}
+%{__make} -C doc/spec
 
 %install
 rm -rf $RPM_BUILD_ROOT
