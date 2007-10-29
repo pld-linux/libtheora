@@ -19,6 +19,7 @@ BuildRequires:	libvorbis-devel >= 1:1.0.1
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
 BuildRequires:	tetex-format-pdflatex
+BuildRequires:	tetex-latex-bibtex
 BuildRequires:	transfig
 Requires:	libogg >= 2:1.1
 Requires:	libvorbis >= 1:1.0.1
