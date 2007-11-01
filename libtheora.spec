@@ -2,15 +2,15 @@ Summary:	Theora - video codec intended for use within Ogg multimedia streaming s
 Summary(pl.UTF-8):	Theora - kodek obrazu do używania w systemie strumieni multimedialnych Ogg
 Name:		libtheora
 Version:	1.0
-%define	bver	beta1
+%define	bver	beta2
 Release:	0.%{bver}.1
 License:	BSD-like
 Group:		Libraries
 Source0:	http://downloads.xiph.org/releases/theora/%{name}-%{version}%{bver}.tar.bz2
-# Source0-md5:	e2ff1996c5a9fadd0df1025aa10bc35e
+# Source0-md5:	6ed9f998a982e996ad53d3686d655cfe
 URL:		http://www.theora.org/
 BuildRequires:	SDL-devel
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	doxygen
 BuildRequires:	libogg-devel >= 2:1.1
@@ -23,8 +23,8 @@ BuildRequires:	tetex-latex-bibtex
 BuildRequires:	transfig
 Requires:	libogg >= 2:1.1
 Requires:	libvorbis >= 1:1.0.1
-Obsoletes:	libtheora-mmx
 Provides:	libtheora-mmx
+Obsoletes:	libtheora-mmx
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -46,8 +46,8 @@ Summary:	Header files for Theora library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Theora
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Obsoletes:	libtheora-mmx-devel
 Provides:	libtheora-mmx-devel
+Obsoletes:	libtheora-mmx-devel
 
 %description devel
 Header files for Theora library.
@@ -60,8 +60,8 @@ Summary:	Static Theora library
 Summary(pl.UTF-8):	Statyczna biblioteka Theora
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
-Obsoletes:	libtheora-mmx-static
 Provides:	libtheora-mmx-static
+Obsoletes:	libtheora-mmx-static
 
 %description static
 Static Theora library.
@@ -89,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	docdir=%{_builddir}/%{buildsubdir}/__docs
+	docdir=%{_docdir}/libtheora-docs
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -99,17 +99,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYING README
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+%doc AUTHORS CHANGES COPYING LICENSE README
+%attr(755,root,root) %{_libdir}/libtheora.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%doc doc/{color.html,vp3-format.txt} doc/libtheora/html doc/spec/Theora_I_spec.pdf
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
+%doc doc/{color.html,draft-ietf-avt-rtp-theora-00.txt,vp3-format.txt} doc/libtheora/html doc/spec/Theora_spec.pdf
+%attr(755,root,root) %{_libdir}/libtheora.so
+%{_libdir}/libtheora.la
 %{_includedir}/theora
 %{_pkgconfigdir}/theora.pc
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libtheora.a
