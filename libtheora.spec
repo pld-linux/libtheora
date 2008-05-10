@@ -2,12 +2,12 @@ Summary:	Theora - video codec intended for use within Ogg multimedia streaming s
 Summary(pl.UTF-8):	Theora - kodek obrazu do używania w systemie strumieni multimedialnych Ogg
 Name:		libtheora
 Version:	1.0
-%define	bver	beta2
+%define	bver	beta3
 Release:	0.%{bver}.1
 License:	BSD-like
 Group:		Libraries
 Source0:	http://downloads.xiph.org/releases/theora/%{name}-%{version}%{bver}.tar.bz2
-# Source0-md5:	6ed9f998a982e996ad53d3686d655cfe
+# Source0-md5:	04b3e1055da49daba6afce93f3214b1f
 URL:		http://www.theora.org/
 BuildRequires:	SDL-devel
 BuildRequires:	autoconf >= 2.50
@@ -20,6 +20,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
 BuildRequires:	tetex-format-pdflatex
 BuildRequires:	tetex-latex-bibtex
+BuildRequires:	tetex-latex-ltablex
 BuildRequires:	transfig
 Requires:	libogg >= 2:1.1
 Requires:	libvorbis >= 1:1.0.1
@@ -101,15 +102,28 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS CHANGES COPYING LICENSE README
 %attr(755,root,root) %{_libdir}/libtheora.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libtheora.so.0
+%attr(755,root,root) %{_libdir}/libtheoradec.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libtheoradec.so.1
+%attr(755,root,root) %{_libdir}/libtheoraenc.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libtheoraenc.so.1
 
 %files devel
 %defattr(644,root,root,755)
-%doc doc/{color.html,draft-ietf-avt-rtp-theora-00.txt,vp3-format.txt} doc/libtheora/html doc/spec/Theora_spec.pdf
+%doc doc/{color.html,draft-ietf-avt-rtp-theora-00.txt,vp3-format.txt} doc/libtheora/html doc/spec/Theora.pdf
 %attr(755,root,root) %{_libdir}/libtheora.so
+%attr(755,root,root) %{_libdir}/libtheoradec.so
+%attr(755,root,root) %{_libdir}/libtheoraenc.so
 %{_libdir}/libtheora.la
+%{_libdir}/libtheoradec.la
+%{_libdir}/libtheoraenc.la
 %{_includedir}/theora
 %{_pkgconfigdir}/theora.pc
+%{_pkgconfigdir}/theoradec.pc
+%{_pkgconfigdir}/theoraenc.pc
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libtheora.a
+%{_libdir}/libtheoradec.a
+%{_libdir}/libtheoraenc.a
