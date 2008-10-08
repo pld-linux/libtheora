@@ -3,7 +3,7 @@ Summary(pl.UTF-8):	Theora - kodek obrazu do używania w systemie strumieni multi
 Name:		libtheora
 Version:	1.0
 %define	subver	RC1
-Release:	0.%{subver}.1
+Release:	1.%{subver}.1
 License:	BSD-like
 Group:		Libraries
 Source0:	http://downloads.xiph.org/releases/theora/%{name}-%{version}%{subver}.tar.bz2
