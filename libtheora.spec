@@ -3,11 +3,12 @@ Summary(pl.UTF-8):	Theora - kodek obrazu do używania w systemie strumieni multi
 Name:		libtheora
 Version:	1.0
 %define	subver	RC1
-Release:	1.%{subver}.1
+Release:	1.%{subver}.2
 License:	BSD-like
 Group:		Libraries
 Source0:	http://downloads.xiph.org/releases/theora/%{name}-%{version}%{subver}.tar.bz2
 # Source0-md5:	93fc6783b263a6576b488f7b1821df10
+Patch0:		%{name}-x86_64.patch
 URL:		http://www.theora.org/
 BuildRequires:	SDL-devel
 BuildRequires:	autoconf >= 2.50
@@ -72,6 +73,7 @@ Statyczna biblioteka Theora.
 
 %prep
 %setup -q -n %{name}-%{version}%{subver}
+%patch0 -p1
 
 %build
 %{__sed} -i 's,CFLAGS="-g -O2 ,CFLAGS=",' configure.ac
