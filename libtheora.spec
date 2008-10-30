@@ -46,6 +46,7 @@ Summary:	Header files for Theora library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Theora
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	libogg-devel >= 2:1.1
 Provides:	libtheora-mmx-devel
 Obsoletes:	libtheora-mmx-devel
 
