@@ -1,3 +1,11 @@
+#
+# Conditional build:
+%if "%{pld_release}" == "ac"
+%bcond_with		apidocs		# do not build and package API docs
+%else
+%bcond_without	apidocs		# do not build and package API docs
+%endif
+
 Summary:	Theora - video codec intended for use within Ogg multimedia streaming system
 Summary(pl.UTF-8):	Theora - kodek obrazu do używania w systemie strumieni multimedialnych Ogg
 Name:		libtheora
@@ -11,15 +19,18 @@ URL:		http://www.theora.org/
 BuildRequires:	SDL-devel
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
-BuildRequires:	doxygen
 BuildRequires:	libogg-devel >= 2:1.1
 BuildRequires:	libtool
 BuildRequires:	libvorbis-devel >= 1:1.0.1
 BuildRequires:	pkgconfig
+BuildRequires:	rpm >= 4.4.9-56
+%if %{with apidocs}
+BuildRequires:	doxygen
 BuildRequires:	tetex-format-pdflatex
 BuildRequires:	tetex-latex-bibtex
 BuildRequires:	tetex-latex-ltablex
 BuildRequires:	transfig
+%endif
 Requires:	libogg >= 2:1.1
 Requires:	libvorbis >= 1:1.0.1
 Provides:	libtheora-mmx
@@ -80,7 +91,9 @@ Statyczna biblioteka Theora.
 %configure
 
 %{__make}
+%if %{with apidocs}
 %{__make} -C doc/spec
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
