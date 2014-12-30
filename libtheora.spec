@@ -15,6 +15,8 @@ License:	BSD-like
 Group:		Libraries
 Source0:	http://downloads.xiph.org/releases/theora/%{name}-%{version}.tar.bz2
 # Source0-md5:	292ab65cedd5021d6b7ddd117e07cd8e
+Patch0:		link.patch
+Patch1:		libpng16.patch
 URL:		http://www.theora.org/
 BuildRequires:	SDL-devel
 BuildRequires:	autoconf >= 2.50
@@ -36,6 +38,8 @@ Requires:	libvorbis >= 1:1.0.1
 Provides:	libtheora-mmx
 Obsoletes:	libtheora-mmx
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		no_install_post_check_so	1
 
 %description
 Theora is Xiph.Org's first publicly released video codec, intended for
@@ -82,6 +86,8 @@ Statyczna biblioteka Theora.
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -98,7 +104,7 @@ Statyczna biblioteka Theora.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
+%{__make} -j1 install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	docdir=%{_docdir}/libtheora-docs
 
