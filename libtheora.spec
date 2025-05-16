@@ -34,7 +34,7 @@ BuildRequires:	transfig
 Requires:	libogg >= 2:1.3.4
 Requires:	libvorbis >= 1:1.0.1
 Provides:	libtheora-mmx
-Obsoletes:	libtheora-mmx
+Obsoletes:	libtheora-mmx < 1.0-1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -58,7 +58,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libogg-devel >= 2:1.3.4
 Provides:	libtheora-mmx-devel
-Obsoletes:	libtheora-mmx-devel
+Obsoletes:	libtheora-mmx-devel < 1.0-1
 
 %description devel
 Header files for Theora library.
@@ -72,7 +72,7 @@ Summary(pl.UTF-8):	Statyczna biblioteka Theora
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Provides:	libtheora-mmx-static
-Obsoletes:	libtheora-mmx-static
+Obsoletes:	libtheora-mmx-static < 1.0-1
 
 %description static
 Static Theora library.
