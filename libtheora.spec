@@ -1,31 +1,29 @@
 #
 # Conditional build:
-%if "%{pld_release}" == "ac"
-%bcond_with		apidocs		# do not build and package API docs
-%else
-%bcond_without	apidocs		# do not build and package API docs
-%endif
+%bcond_without	apidocs		# API documentation
 
 Summary:	Theora - video codec intended for use within Ogg multimedia streaming system
 Summary(pl.UTF-8):	Theora - kodek obrazu do używania w systemie strumieni multimedialnych Ogg
 Name:		libtheora
-Version:	1.1.1
-Release:	3
+Version:	1.2.0
+Release:	1
 License:	BSD-like
 Group:		Libraries
-Source0:	http://downloads.xiph.org/releases/theora/%{name}-%{version}.tar.bz2
-# Source0-md5:	292ab65cedd5021d6b7ddd117e07cd8e
-Patch0:		link.patch
-Patch1:		libpng16.patch
-URL:		http://www.theora.org/
+Source0:	https://downloads.xiph.org/releases/theora/%{name}-%{version}.tar.xz
+# Source0-md5:	ec64ed07bffb5f45dca0ae7faa68f814
+URL:		https://www.theora.org/
 BuildRequires:	SDL-devel
-BuildRequires:	autoconf >= 2.50
-BuildRequires:	automake
-BuildRequires:	libogg-devel >= 2:1.1
-BuildRequires:	libtool
+BuildRequires:	autoconf >= 2.71
+BuildRequires:	automake >= 1:1.11
+BuildRequires:	libogg-devel >= 2:1.3.4
+BuildRequires:	libpng-devel
+BuildRequires:	libtiff-devel
+BuildRequires:	libtool >= 2:2
 BuildRequires:	libvorbis-devel >= 1:1.0.1
 BuildRequires:	pkgconfig
-BuildRequires:	rpm >= 4.4.9-56
+BuildRequires:	rpm-build >= 4.6
+BuildRequires:	tar >= 1:1.22
+BuildRequires:	xz
 %if %{with apidocs}
 BuildRequires:	doxygen
 BuildRequires:	tetex-format-pdflatex
@@ -33,13 +31,11 @@ BuildRequires:	tetex-latex-bibtex
 BuildRequires:	tetex-latex-ltablex
 BuildRequires:	transfig
 %endif
-Requires:	libogg >= 2:1.1
+Requires:	libogg >= 2:1.3.4
 Requires:	libvorbis >= 1:1.0.1
 Provides:	libtheora-mmx
 Obsoletes:	libtheora-mmx
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		no_install_post_check_so	1
 
 %description
 Theora is Xiph.Org's first publicly released video codec, intended for
@@ -60,7 +56,7 @@ Summary:	Header files for Theora library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Theora
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	libogg-devel >= 2:1.1
+Requires:	libogg-devel >= 2:1.3.4
 Provides:	libtheora-mmx-devel
 Obsoletes:	libtheora-mmx-devel
 
@@ -84,17 +80,29 @@ Static Theora library.
 %description static -l pl.UTF-8
 Statyczna biblioteka Theora.
 
+%package apidocs
+Summary:	API documentation for Theora library
+Summary(pl.UTF-8):	Dokumentacja API biblioteki Theora
+Group:		Documentation
+BuildArch:	noarch
+
+%description apidocs
+API documentation for Theora library.
+
+%description apidocs -l pl.UTF-8
+Dokumentacja API biblioteki Theora.
+
 %prep
 %setup -q
-%patch -P0 -p1
-%patch -P1 -p1
 
 %build
 %{__libtoolize}
 %{__aclocal} -I m4
 %{__autoconf}
+%{__autoheader}
 %{__automake}
-%configure
+%configure \
+	--disable-silent-rules
 
 %{__make}
 %if %{with apidocs}
@@ -108,6 +116,11 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	docdir=%{_docdir}/libtheora-docs
 
+# obsoleted by pkg-config
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libtheora*.la
+# packaged as %doc
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/libtheora-docs
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -116,23 +129,19 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS CHANGES COPYING LICENSE README
+%doc AUTHORS CHANGES COPYING LICENSE README.md
 %attr(755,root,root) %{_libdir}/libtheora.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libtheora.so.0
+%attr(755,root,root) %ghost %{_libdir}/libtheora.so.1
 %attr(755,root,root) %{_libdir}/libtheoradec.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libtheoradec.so.1
+%attr(755,root,root) %ghost %{_libdir}/libtheoradec.so.2
 %attr(755,root,root) %{_libdir}/libtheoraenc.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libtheoraenc.so.1
+%attr(755,root,root) %ghost %{_libdir}/libtheoraenc.so.2
 
 %files devel
 %defattr(644,root,root,755)
-%doc doc/{color.html,draft-ietf-avt-rtp-theora-00.txt,vp3-format.txt} doc/libtheora/html doc/spec/Theora.pdf
 %attr(755,root,root) %{_libdir}/libtheora.so
 %attr(755,root,root) %{_libdir}/libtheoradec.so
 %attr(755,root,root) %{_libdir}/libtheoraenc.so
-%{_libdir}/libtheora.la
-%{_libdir}/libtheoradec.la
-%{_libdir}/libtheoraenc.la
 %{_includedir}/theora
 %{_pkgconfigdir}/theora.pc
 %{_pkgconfigdir}/theoradec.pc
@@ -143,3 +152,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libtheora.a
 %{_libdir}/libtheoradec.a
 %{_libdir}/libtheoraenc.a
+
+%files apidocs
+%defattr(644,root,root,755)
+%doc doc/{color.html,draft-ietf-avt-rtp-theora-00.txt,vp3-format.txt} doc/libtheora/html doc/spec/Theora.pdf
