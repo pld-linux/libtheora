@@ -14,12 +14,9 @@ Source0:	https://downloads.xiph.org/releases/theora/%{name}-%{version}.tar.xz
 # Source0-md5:	ec64ed07bffb5f45dca0ae7faa68f814
 URL:		https://www.theora.org/
 BuildRequires:	SDL-devel
-BuildRequires:	autoconf >= 2.71
-BuildRequires:	automake >= 1:1.11
 BuildRequires:	libogg-devel >= 2:1.3.4
 BuildRequires:	libpng-devel
 BuildRequires:	libtiff-devel
-BuildRequires:	libtool >= 2:2
 BuildRequires:	libvorbis-devel >= 1:1.0.1
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
@@ -98,11 +95,6 @@ Dokumentacja API biblioteki Theora.
 %setup -q
 
 %build
-%{__libtoolize}
-%{__aclocal} -I m4
-%{__autoconf}
-%{__autoheader}
-%{__automake}
 %configure \
 	%{__enable_disable static_libs static} \
 	--disable-silent-rules
