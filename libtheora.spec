@@ -1,6 +1,7 @@
 #
 # Conditional build:
 %bcond_without	apidocs		# API documentation
+%bcond_without	static_libs	# static libraries
 
 Summary:	Theora - video codec intended for use within Ogg multimedia streaming system
 Summary(pl.UTF-8):	Theora - kodek obrazu do używania w systemie strumieni multimedialnych Ogg
@@ -22,6 +23,7 @@ BuildRequires:	libtool >= 2:2
 BuildRequires:	libvorbis-devel >= 1:1.0.1
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
+BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 %if %{with apidocs}
@@ -102,6 +104,7 @@ Dokumentacja API biblioteki Theora.
 %{__autoheader}
 %{__automake}
 %configure \
+	%{__enable_disable static_libs static} \
 	--disable-silent-rules
 
 %{__make}
@@ -147,11 +150,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/theoradec.pc
 %{_pkgconfigdir}/theoraenc.pc
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libtheora.a
 %{_libdir}/libtheoradec.a
 %{_libdir}/libtheoraenc.a
+%endif
 
 %files apidocs
 %defattr(644,root,root,755)
