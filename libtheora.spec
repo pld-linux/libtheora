@@ -12,6 +12,7 @@ License:	BSD-like
 Group:		Libraries
 Source0:	https://downloads.xiph.org/releases/theora/%{name}-%{version}.tar.xz
 # Source0-md5:	ec64ed07bffb5f45dca0ae7faa68f814
+Patch0:		missing-files.patch
 URL:		https://www.theora.org/
 BuildRequires:	SDL-devel
 BuildRequires:	libogg-devel >= 2:1.3.4
@@ -93,6 +94,7 @@ Dokumentacja API biblioteki Theora.
 
 %prep
 %setup -q
+%patch -P0 -p1
 
 %build
 %configure \
