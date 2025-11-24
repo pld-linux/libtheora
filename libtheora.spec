@@ -97,12 +97,11 @@ Dokumentacja API biblioteki Theora.
 %build
 %configure \
 	%{__enable_disable static_libs static} \
-	--disable-silent-rules
+	--disable-silent-rules \
+	%{__enable_disable apidocs doc} \
+	%{__enable_disable apidocs spec}
 
 %{__make}
-%if %{with apidocs}
-%{__make} -C doc/spec
-%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -150,6 +149,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libtheoraenc.a
 %endif
 
+%if %{with apidocs}
 %files apidocs
 %defattr(644,root,root,755)
 %doc doc/{color.html,draft-ietf-avt-rtp-theora-00.txt,vp3-format.txt} doc/libtheora/html doc/spec/Theora.pdf
+%endif
